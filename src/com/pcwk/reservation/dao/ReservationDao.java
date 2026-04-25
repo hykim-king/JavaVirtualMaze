@@ -22,16 +22,17 @@ import com.pcwk.reservation.domain.ReservationVO;
  */
 public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 	
-	// 예약 정보 파일
+	// 예약 정보 파일 경로
 	public static final String RESERVATION_DATA = "C:\\Users\\Hee\\Documents\\CJFS_20260324\\01_Java1\\WORKSPACE\\JavaVirtualMaze\\data\\RESERVATION_DATA.csv";
 	
-	// 
+	// ReservationVO 리스트
 	private List<ReservationVO> reservation = new ArrayList<ReservationVO>();
 	
 	/**
 	 *  기본 생성자
 	 */
 	public ReservationDao() {
+		// 기존 파일 내용 날라가지 않게 읽어오기
 		getReadReservation(RESERVATION_DATA);
 	}
 	
@@ -101,6 +102,10 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 	
 	}
 	
+	/**
+	 * ReservationVO 리스트 반환 메서드
+	 * @return
+	 */
 	public List<ReservationVO> getAllReservation() {
 		
 		return reservation;
@@ -109,6 +114,11 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 
 
 	@Override
+	/**
+	 * 예약 메서드
+	 * @param
+	 * @return flag
+	 */
 	public int doSave(ReservationVO param) {
 		int flag = 0;
 		
@@ -121,6 +131,7 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 
 	@Override
 	/**
+	 * 예약 정보 수정 메서드
 	 * @param
 	 * return flag = 2 : 예약 없음, 3 : 예약 수정
 	 */
@@ -143,6 +154,11 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 
 
 	@Override
+	/**
+	 * 예약 삭제 메서드
+	 * @param
+	 * @return flag
+	 */
 	public int doDelete(ReservationVO param) {
 		int flag = 0;
 		
@@ -164,6 +180,11 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 
 
 	@Override
+	/**
+	 * 예약 내역 조회(모바일번호)
+	 * @param
+	 * @return ArrayList<ReservationVO>
+	 */
 	public ArrayList<ReservationVO> doSelectOne(ReservationVO param) {
 		
 		ArrayList<ReservationVO> list = new ArrayList<ReservationVO>();

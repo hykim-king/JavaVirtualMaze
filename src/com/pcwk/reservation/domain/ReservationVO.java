@@ -4,19 +4,31 @@
 package com.pcwk.reservation.domain;
 
 import com.pcwk.cmn.DTO;
-import com.pcwk.reservation.dao.ReservationDao;
 
 /**
- * 
+ * 예약정보 객체
+ * name: 이름
+ * mobileNumber: 전화번호
+ * date: 날짜
+ * themeName: 테마명
  */
 public class ReservationVO extends DTO {
 	
+	/**
+	 * ReservationVO 인스턴스변수
+	 */
 	private String name;
 	private String mobileNumber;
 	private String date;
 	private String themeName;
-	ReservationDao dao;
 	
+	/**
+	 * 기본 생성자
+	 * @param name
+	 * @param mobileNumber
+	 * @param date
+	 * @param theme
+	 */
 	public ReservationVO(String name, String mobileNumber, String date, String theme) {
 		super();
 		this.name = name;
@@ -26,13 +38,20 @@ public class ReservationVO extends DTO {
 		
 	}
 	
-	
+	/**
+	 * 파일 쓸때 간편화 메서드
+	 * @return
+	 */
 	public String toCsv() {
 		return String.format("%s,%s,%s,%s", 
 				name, mobileNumber, date, themeName);
 		
 	}
 	
+	/**
+	 * ReservationVO 출력 메서드
+	 * @return
+	 */
 	public String toPrint() {
 		return String.format("%-10s|%-12s|%-15s|%-15s", 
 				name, mobileNumber, date, themeName);
