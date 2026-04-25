@@ -4,6 +4,7 @@
 package com.pcwk.reservation.domain;
 
 import com.pcwk.cmn.DTO;
+import com.pcwk.reservation.dao.ReservationDao;
 
 /**
  * 
@@ -13,29 +14,29 @@ public class ReservationVO extends DTO {
 	private String name;
 	private String mobileNumber;
 	private String date;
-	private String theme;
+	private String themeName;
+	ReservationDao dao;
 	
 	public ReservationVO(String name, String mobileNumber, String date, String theme) {
 		super();
 		this.name = name;
 		this.mobileNumber = mobileNumber;
 		this.date = date;
-		this.theme = theme;
+		this.themeName = theme;
+		
 	}
 	
 	
 	public String toCsv() {
 		return String.format("%s,%s,%s,%s", 
-				name, mobileNumber, date, theme);
+				name, mobileNumber, date, themeName);
+		
 	}
 	
 	public String toPrint() {
 		return String.format("%-10s|%-12s|%-15s|%-15s", 
-				name, mobileNumber, date, theme);
+				name, mobileNumber, date, themeName);
 	}
-	
-	
-	
 	
 
 	/**
@@ -84,19 +85,19 @@ public class ReservationVO extends DTO {
 	 * @return the theme
 	 */
 	public String getTheme() {
-		return theme;
+		return themeName;
 	}
 
 	/**
 	 * @param theme the theme to set
 	 */
 	public void setTheme(String theme) {
-		this.theme = theme;
+		this.themeName = theme;
 	}
 
 	@Override
 	public String toString() {
-		return "ReservationVO [name=" + name + ", mobileNumber=" + mobileNumber + ", date=" + date + ", theme=" + theme
+		return "ReservationVO [name=" + name + ", mobileNumber=" + mobileNumber + ", date=" + date + ", theme=" + themeName
 				+ ", toString()=" + super.toString() + "]";
 	}
 	
