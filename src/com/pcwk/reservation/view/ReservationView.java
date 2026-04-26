@@ -7,11 +7,7 @@ import java.util.*;
 
 import com.pcwk.cmn.PLogger;
 import com.pcwk.reservation.domain.ReservationVO;
-import com.pcwk.reservation.service.*;
-
-import VO.ThemeVO;
-
-import com.pcwk.reservation.domain.*;
+import com.pcwk.theme.vo.ThemeVO;
 
 public class ReservationView implements PLogger {
 	
@@ -37,9 +33,9 @@ public class ReservationView implements PLogger {
 
     	printTitle("예약 내역 조회");
     	
-        log.debug("조회할 전화번호 입력:  ");
+        System.out.print("조회할 전화번호 입력:  ");
         String mobileNumber=sc.nextLine();
-        log.debug("조회할 전화번호: {}",mobileNumber);
+        System.out.println("조회할 전화번호: "+ mobileNumber);
 
         
         return new ReservationVO(null, mobileNumber, null , null);
@@ -52,8 +48,9 @@ public class ReservationView implements PLogger {
     public void printInReservationList(List<ReservationVO> reservationList) {
     	
     	for (ReservationVO vo : reservationList) {
-    		
-    	log.debug("예약 내역 출력: {}",vo.toCsv());
+    		System.out.println("──────────────────────────────────────────────");
+    		System.out.println("예약 내역 출력: "+ vo.toCsv());
+    		System.out.println("──────────────────────────────────────────────");
     	}
     	
     	
@@ -63,8 +60,7 @@ public class ReservationView implements PLogger {
      * 조회 결과가 없으면 예약 정보를 출력하지않는다.
      */
     public void printOutReservationList() {
-        log.debug("예약 내역 없음");
-        
+    	System.out.println("예약 내역 없음");      
     }
 
     
@@ -83,9 +79,9 @@ public class ReservationView implements PLogger {
  
     	printTitle("예약 메뉴");
 
-        log.debug("1. 예약수정");
-        log.debug("2. 예약삭제");
-        log.debug("3. 메인메뉴");
+    	System.out.println("1. 예약수정");
+    	System.out.println("2. 예약삭제");
+    	System.out.println("3. 메인메뉴");
         
 
         return inputNumber("메뉴 선택 : ");
@@ -109,11 +105,12 @@ public class ReservationView implements PLogger {
 
     	printTitle("예약 수정 입력");
 
+    	String name = inputText("이름을 입력하세요 > ");
         String mobileNumber = inputText("수정할 예약 전화번호 입력 > ");
         String date = inputText("변경할 날짜 입력 > ");
         String theme = inputText("변경할 테마 입력 > ");
 
-        return new ReservationVO("", mobileNumber, date, theme);
+        return new ReservationVO(name, mobileNumber, date, theme);
         
     }
 
@@ -130,9 +127,9 @@ public class ReservationView implements PLogger {
 
         printTitle("예약 삭제 입력");
 
-		log.debug("현재 조회된 예약을 삭제하시겠습니까?");
-		log.debug("1. 삭제");
-		log.debug("2. 취소");
+        System.out.println("현재 조회된 예약을 삭제하시겠습니까?");
+        System.out.println("1. 삭제");
+        System.out.println("2. 취소");
 
         int menu = inputNumber("선택 : ");
 
@@ -151,15 +148,15 @@ public class ReservationView implements PLogger {
 
         printTitle("예약 확인");
 
-        log.debug("선택한 테마로 예약하시겠습니까?");
-        log.debug("1. 예약하기");
-        log.debug("2. 취소");
+        System.out.println("선택한 테마로 예약하시겠습니까?");
+        System.out.println("1. 예약하기");
+        System.out.println("2. 취소");
 
         int menu = inputNumber("선택 : ");
         
         if(menu == 2)
         {
-        	log.debug("취소 되었습니다 목록으로 돌아갑니다");
+        	System.out.println("취소 되었습니다 목록으로 돌아갑니다");
         }
 
         return menu == 1;
@@ -202,11 +199,11 @@ public class ReservationView implements PLogger {
         printTitle("예약 정보 결과");
 
         if (flag == 1) {
-        	log.debug("예약이 완료되었습니다.");
+        	System.out.println("예약이 완료되었습니다.");
         } else if (flag == 2) {
-        	log.debug("이미 예약된 날짜와 테마입니다.");
+        	System.out.println("이미 예약된 날짜와 테마입니다.");
         } else {
-        	log.debug("예약에 실패했습니다.");
+        	System.out.println("예약에 실패했습니다.");
         }
     }
 
@@ -225,11 +222,11 @@ public class ReservationView implements PLogger {
         printTitle("예약 수정 결과");
 
         if (flag == 3) {
-        	log.debug("예약 수정이 완료되었습니다.");
+        	System.out.println("예약 수정이 완료되었습니다.");
         } else if (flag == 2) {
-        	log.debug("해당 전화번호의 예약 내역이 없습니다.");
+        	System.out.println("해당 전화번호의 예약 내역이 없습니다.");
         } else {
-        	log.debug("예약 수정에 실패했습니다.");
+        	System.out.println("예약 수정에 실패했습니다.");
         }
     }
 
@@ -249,11 +246,11 @@ public class ReservationView implements PLogger {
         printTitle("예약 삭제 결과");
 
         if (flag == 1) {
-        	log.debug("예약 삭제가 완료되었습니다.");
+        	System.out.println("예약 삭제가 완료되었습니다.");
         } else if (flag == 2) {
-        	log.debug("해당 전화번호의 예약 내역이 없습니다.");
+        	System.out.println("해당 전화번호의 예약 내역이 없습니다.");
         } else {
-        	log.debug("예약 삭제에 실패했습니다.");
+        	System.out.println("예약 삭제에 실패했습니다.");
         }
     }
 
@@ -264,7 +261,7 @@ public class ReservationView implements PLogger {
 
         printTitle("예약 완료");
         
-        log.debug("예약 처리가 완료되었습니다.");
+        System.out.print("예약 처리가 완료되었습니다.");
     }
 
     /**
@@ -280,8 +277,8 @@ public class ReservationView implements PLogger {
 
         printTitle("다음 메뉴 선택");
 
-        log.debug("1. 메인메뉴");
-        log.debug("2. 예약내역조회");
+        System.out.println("1. 메인메뉴");
+        System.out.println("2. 예약내역조회");
 
         return inputNumber("메뉴 선택 > ");
     }
@@ -299,17 +296,17 @@ public class ReservationView implements PLogger {
      */
     private int inputNumber(String message) {
         while (true) {
-        	log.debug(message);
+        	System.out.print(message);
 
             String input = sc.nextLine().trim();
 
             try {
                 int number = Integer.parseInt(input);
-                log.debug("숫자 입력 성공 - {}", number);
+                System.out.println("숫자 입력 성공 - "+ number);
                 return number;
             } catch (NumberFormatException e) {
-                log.warn("숫자 입력 실패 - input: {}", input);
-                log.debug("숫자만 입력해주세요.");
+            	System.out.println("숫자 입력 실패 - input: "+ input);
+            	System.out.println("숫자만 입력해주세요.");
             }
         }
     }
@@ -325,17 +322,17 @@ public class ReservationView implements PLogger {
      */
     private String inputText(String message) {
         while (true) {
-            log.debug(message);
+        	System.out.print(message);
 
             String input = sc.nextLine();
 
             if (input.isEmpty()) {
-                log.warn("빈 문자열 입력");
-                log.debug("값을 입력해주세요.");
+            	System.out.println("빈 문자열 입력");
+            	System.out.println("값을 입력해주세요.");
                 continue;
             }
 
-            log.debug("문자열 입력 성공 - {}", input);
+            System.out.println("문자열 입력 성공 - "+ input);
             return input;
         }
     }
@@ -348,7 +345,7 @@ public class ReservationView implements PLogger {
     private void printTitle(String title) {
         System.out.println();
         printLine();
-        log.debug(title);
+        System.out.println(title);
         printLine();
     }
 
@@ -356,7 +353,7 @@ public class ReservationView implements PLogger {
      * 구분선 출력
      */
     private void printLine() {
-    	log.debug("================================");
+    	System.out.println("================================");
     }
 	
 	

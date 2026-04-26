@@ -1,15 +1,21 @@
-package Dao;
+package com.pcwk.theme.dao;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import VO.ThemeVO;
+import com.pcwk.theme.vo.ThemeVO;
 
 public class ThemeDao {
 
     private List<ThemeVO> themeList = new ArrayList<>();
+    
+    private static final String THEMES_DATA = "data/themes.csv"; 
 
+    public ThemeDao() {
+    	this(THEMES_DATA);
+    }
+    
     public ThemeDao(String csvPath) {
         loadFromCSV(csvPath);
     }

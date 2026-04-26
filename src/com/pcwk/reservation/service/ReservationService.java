@@ -3,6 +3,7 @@
  */
 package com.pcwk.reservation.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pcwk.reservation.dao.ReservationDao;
@@ -19,7 +20,7 @@ public class ReservationService {
 	 * 기본 생성자,  ReservationDao 인스턴스 생성
 	 */
 	public ReservationService() {	
-		dao = new ReservationDao(ReservationDao.RESERVATION_DATA);
+		dao = new ReservationDao();
 	}
 	
 	/**
@@ -46,7 +47,7 @@ public class ReservationService {
 		if(flag == 1) // 예약 성공 flag = 1
 		{
 			// 예약된 데이터 CSV파일에 새로작성
-			dao.writerReservation(ReservationDao.RESERVATION_DATA);
+			dao.writerReservation();
 		}
 		
 		// flag 1반환
@@ -76,7 +77,7 @@ public class ReservationService {
 		if(flag == 1) // 삭제완료 flag = 1
 		{
 			// 삭제후 CSV파일에 새로작성
-			dao.writerReservation(ReservationDao.RESERVATION_DATA);
+			dao.writerReservation();
 		}
 		
 		return flag; // flag반환
@@ -99,7 +100,7 @@ public class ReservationService {
 		
 		if(flag == 3)
 		{
-			dao.writerReservation(ReservationDao.RESERVATION_DATA);
+			dao.writerReservation();
 		}
 		
 		return flag; // flag반환
@@ -109,9 +110,10 @@ public class ReservationService {
 	/**
 	 * 예약 정보 조회
 	 * @param param
+	 * @return 
 	 */
-	public void selectReservation(ReservationVO param) {
-		dao.doSelectOne(param);
+	public ArrayList<ReservationVO> selectReservation(ReservationVO param) {
+		return dao.doSelectOne(param);
 	}
 	
 

@@ -23,7 +23,7 @@ import com.pcwk.reservation.domain.ReservationVO;
 public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 	
 	// 예약 정보 파일 경로
-	public static final String RESERVATION_DATA = "C:\\Users\\Hee\\Documents\\CJFS_20260324\\01_Java1\\WORKSPACE\\JavaVirtualMaze\\data\\RESERVATION_DATA.csv";
+	private static final String RESERVATION_DATA = "data/RESERVATION_DATA.csv";
 	
 	// ReservationVO 리스트
 	private List<ReservationVO> reservation = new ArrayList<ReservationVO>();
@@ -31,6 +31,9 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 	/**
 	 *  기본 생성자
 	 */
+	public ReservationDao() {
+		this(RESERVATION_DATA);
+	}
 	public ReservationDao(String path) {
 		// 기존 파일 내용 날라가지 않게 읽어오기
 		getReadReservation(path);
@@ -57,7 +60,6 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 				if(strArray.length == 4)
 				{
 					ReservationVO member = new ReservationVO(strArray[0], strArray[1], strArray[2], strArray[3]);
-					log.debug("{}, {}", count, member.toString());
 					reservation.add(member);
 				}
 			}
@@ -81,10 +83,10 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 	 * Reservation.CSV파일 쓰기
 	 * @param path
 	 */
-	public void writerReservation(String path) {
+	public void writerReservation() {
 		int count = 0;
 		
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(RESERVATION_DATA))) {
 			for(ReservationVO vo :reservation)
 			{
 				count++;
@@ -196,8 +198,6 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 				list.add(vo);
 			}
 		}
-		
-		log.debug(list);
 		
 		return list;
 	}
