@@ -19,7 +19,7 @@ public class ReservationService {
 	 * 기본 생성자,  ReservationDao 인스턴스 생성
 	 */
 	public ReservationService() {	
-		dao = new ReservationDao();
+		dao = new ReservationDao(ReservationDao.RESERVATION_DATA);
 	}
 	
 	/**

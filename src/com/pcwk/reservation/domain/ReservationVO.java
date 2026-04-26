@@ -29,12 +29,12 @@ public class ReservationVO extends DTO {
 	 * @param date
 	 * @param theme
 	 */
-	public ReservationVO(String name, String mobileNumber, String date, String theme) {
+	public ReservationVO(String name, String mobileNumber, String date, String themeName) {
 		super();
 		this.name = name;
 		this.mobileNumber = mobileNumber;
 		this.date = date;
-		this.themeName = theme;
+		this.themeName = themeName;
 		
 	}
 	
@@ -110,8 +110,8 @@ public class ReservationVO extends DTO {
 	/**
 	 * @param theme the theme to set
 	 */
-	public void setTheme(String theme) {
-		this.themeName = theme;
+	public void setTheme(String themeName) {
+		this.themeName = themeName;
 	}
 
 	@Override

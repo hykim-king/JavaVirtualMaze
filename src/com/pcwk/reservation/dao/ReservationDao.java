@@ -31,9 +31,9 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 	/**
 	 *  기본 생성자
 	 */
-	public ReservationDao() {
+	public ReservationDao(String path) {
 		// 기존 파일 내용 날라가지 않게 읽어오기
-		getReadReservation(RESERVATION_DATA);
+		getReadReservation(path);
 	}
 	
 	
@@ -196,6 +196,8 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 				list.add(vo);
 			}
 		}
+		
+		log.debug(list);
 		
 		return list;
 	}
