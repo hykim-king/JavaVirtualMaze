@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.pcwk.theme.vo.ThemeVO;
+import com.pcwk.theme.domain.ThemeVO;
 
 public class ThemeView {
 

@@ -8,9 +8,9 @@ import java.util.List;
 import com.pcwk.reservation.domain.ReservationVO;
 import com.pcwk.reservation.service.ReservationService;
 import com.pcwk.reservation.view.ReservationView;
+import com.pcwk.theme.domain.ThemeVO;
 import com.pcwk.theme.service.ThemeService;
 import com.pcwk.theme.view.ThemeView;
-import com.pcwk.theme.vo.ThemeVO;
 
 /**
  * 시스템 메인 컨트롤러 클래스 메인 로직은 전부 여기서 돌아감

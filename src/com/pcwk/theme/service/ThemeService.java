@@ -3,7 +3,7 @@ package com.pcwk.theme.service;
 import java.util.List;
 
 import com.pcwk.theme.dao.ThemeDao;
-import com.pcwk.theme.vo.ThemeVO;
+import com.pcwk.theme.domain.ThemeVO;
 
 public class ThemeService {
 	

@@ -7,7 +7,7 @@ import java.util.*;
 
 import com.pcwk.cmn.PLogger;
 import com.pcwk.reservation.domain.ReservationVO;
-import com.pcwk.theme.vo.ThemeVO;
+import com.pcwk.theme.domain.ThemeVO;
 
 public class ReservationView implements PLogger {
 
