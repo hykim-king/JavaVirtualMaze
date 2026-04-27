@@ -14,4 +14,22 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>lib/log4j-api-2.25.3.jar</name>
+			<type>1</type>
+			<locationURI>copy_PARENT/APP/log4j-api-2.25.3.jar</locationURI>
+		</link>
+		<link>
+			<name>lib/log4j-core-2.25.3.jar</name>
+			<type>1</type>
+			<locationURI>copy_PARENT/APP/log4j-core-2.25.3.jar</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>copy_PARENT</name>
+			<value>$%7BPARENT-3-ECLIPSE_HOME%7D</value>
+		</variable>
+	</variableList>
 </projectDescription>

@@ -45,7 +45,6 @@ public class ReservationVO extends DTO {
 	public String toCsv() {
 		return String.format("%s,%s,%s,%s", 
 				name, mobileNumber, date, themeName);
-		
 	}
 	
 	/**
@@ -57,7 +56,6 @@ public class ReservationVO extends DTO {
 				name, mobileNumber, date, themeName);
 	}
 	
-
 	/**
 	 * @return the name
 	 */
@@ -119,16 +117,5 @@ public class ReservationVO extends DTO {
 		return "ReservationVO [name=" + name + ", mobileNumber=" + mobileNumber + ", date=" + date + ", theme=" + themeName
 				+ ", toString()=" + super.toString() + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
