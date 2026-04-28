@@ -62,7 +62,6 @@ public class ReservationView implements PLogger {
     		System.out.println("──────────────────────────────────────────────");
     	}
     	
-    	
     }
     /**
      * 예약 내역 조회 결과 출력
@@ -72,8 +71,6 @@ public class ReservationView implements PLogger {
     	System.out.println("예약 내역 없음");      
     }
 
-    
-    
     /**
      * 예약 메뉴
      * 예약 내역 출력 후 표시되는 메뉴다.
@@ -173,22 +170,22 @@ public class ReservationView implements PLogger {
      * @return true면 예약 진행, false면 예약 취소
      */
     public boolean confirmReservation() {
-        
+    	
+    	while(true)
+    	{
+    	    System.out.print("\n  선택한 테마로 예약하시겠습니까? (Y/N) > ");
+    	    String answer = sc.nextLine().trim();
 
-        printTitle("예약 확인");
-
-        System.out.println("선택한 테마로 예약하시겠습니까?");
-        System.out.println("1. 예약하기");
-        System.out.println("2. 취소");
-
-        int menu = inputNumber("선택 : ");
-        
-        if(menu == 2)
-        {
-        	System.out.println("취소 되었습니다 목록으로 돌아갑니다");
-        }
-
-        return menu == 1;
+			if (answer.equalsIgnoreCase("Y")) {
+				return true;
+			} else if (answer.equalsIgnoreCase("N")) {
+				System.out.println("취소되었습니다. 목록으로 돌아갑니다.");
+				return false;
+			} else {
+				System.out.println("Y 또는 N만 입력해주세요.");
+			}
+    	}
+    	
     }
     
     
