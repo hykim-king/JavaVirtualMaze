@@ -53,7 +53,7 @@ public class ReservationVO extends DTO {
 	 * @return
 	 */
 	public String toPrint() {
-		return String.format("%-10s|%-12s|%-15s|%-15s", 
+		return String.format("%s|%s|%s|%s", 
 				name, mobileNumber, date, themeName);
 	}
 	

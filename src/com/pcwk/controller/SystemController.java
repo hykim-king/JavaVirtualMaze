@@ -290,7 +290,7 @@ public class SystemController {
         int flag = reservationService.updateReservation(vo, updateVo);
 
         // 결과 출력
-        reservationView.printUpdateResult(flag);
+        reservationView.printUpdateResult(flag, updateVo);
 
 //        if (flag == 2) {
 //            reservationView.printReserveComplete();

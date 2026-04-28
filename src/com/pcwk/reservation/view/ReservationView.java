@@ -3,6 +3,8 @@
  */
 package com.pcwk.reservation.view;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 import com.pcwk.cmn.PLogger;
@@ -111,14 +113,38 @@ public class ReservationView implements PLogger {
 
     	printTitle("예약 수정 입력");
 
-    	String theme = inputText("변경할 테마 입력 > ");
-        String date = inputText("변경할 날짜 입력 > ");
+    	int theme = inputNumber("변경할 테마의 번호 입력 > ");
         
-        // 수정할 테마 번호 선택 후 인덱스번호로 받기
-        int idx = Integer.parseInt(theme);
+        String date = "";
+        LocalDate today = LocalDate.now();
+
+        while (true) {
+            date = inputText("변경 할 날짜 입력 (YYYY-MM-DD) > ");
+            
+            try {
+                // 1. 입력받은 문자열을 LocalDate로 변환
+                LocalDate inputDate = LocalDate.parse(date);
+
+                // 2. isBefore를 사용하여 오늘보다 이전인지 체크
+                if (inputDate.isBefore(today)) {
+                	System.out.println("오늘 이전 날짜로 변경 할 수 없습니다. (today: " + today + ") 다시 입력해주세요.");
+                    continue; // 다시 입력받기
+                }
+
+                // 모든 검증 통과 시 루프 종료
+                break; 
+                
+            } catch (DateTimeParseException e) {
+                // 날짜 형식이 올바르지 않은 경우 (예: 2026-02-30 등 존재하지 않는 날짜 포함)
+                System.out.println("날짜 형식이 올바르지 않습니다 다시 입력해주세요.");
+            }
+        }
+
         // 수정할 테마 받기
-        ThemeVO vo = listParam.get(idx - 1);
+        ThemeVO vo = listParam.get(theme - 1);
         
+        System.out.println("입력한 날짜: " + date);
+ 
         // 수정시 필요한 날짜와 테마 이름만 새로 담고 반환
         ReservationVO updateVo = new ReservationVO(param.getName(), param.getMobileNumber(), date, vo.getThemeName());
 
@@ -228,9 +254,37 @@ public class ReservationView implements PLogger {
         printTitle("예약 정보 입력");
 
         String name = inputText("이름 입력 > ");
-       // if()
         String mobileNumber = inputText("전화번호 입력 > ");
-        String date = inputText("예약 날짜 입력 > ");
+        
+        String date = "";
+        LocalDate today = LocalDate.now();
+
+        while (true) {
+            date = inputText("예약 날짜 입력 (YYYY-MM-DD) > ");
+            
+            try {
+                // 1. 입력받은 문자열을 LocalDate로 변환
+                LocalDate inputDate = LocalDate.parse(date);
+
+                // 2. isBefore를 사용하여 오늘보다 이전인지 체크
+                if (inputDate.isBefore(today)) {
+                	System.out.println("오늘 이전 날짜는 예약할 수 없습니다. (today: " + today + ") 다시 입력해주세요.");
+                    continue; // 다시 입력받기
+                }
+
+                // 모든 검증 통과 시 루프 종료
+                break; 
+                
+            } catch (DateTimeParseException e) {
+                // 날짜 형식이 올바르지 않은 경우 (예: 2026-02-30 등 존재하지 않는 날짜 포함)
+                System.out.println("날짜 형식이 올바르지 않습니다 다시 입력해주세요.");
+            }
+        }
+        
+        System.out.println("입력한 이름: " + name + "\n" + 
+        				   "입력한 전화번호: " + mobileNumber + "\n" +
+        				   "입력한 날짜: " + date);
+        
         String theme = selectedTheme.getThemeName();
 
         return new ReservationVO(name, mobileNumber, date, theme);
@@ -270,12 +324,14 @@ public class ReservationView implements PLogger {
      *
      * @param flag Service에서 반환한 처리 결과
      */
-    public void printUpdateResult(int flag) {
+    public void printUpdateResult(int flag, ReservationVO updateVo) {
         
         printTitle("예약 수정 결과");
 
         if (flag == 3) {
         	System.out.println("예약 수정이 완료되었습니다.");
+        	System.out.println(updateVo.toPrint());
+        	printLine();
         } else if (flag == 2) {
         	System.out.println("해당 전화번호의 예약 내역이 없습니다.");
         } else {
@@ -355,7 +411,7 @@ public class ReservationView implements PLogger {
 
             try {
                 int number = Integer.parseInt(input);
-                System.out.println("숫자 입력 성공 - "+ number);
+                //System.out.println("숫자 입력 성공 - "+ number);
                 return number;
             } catch (NumberFormatException e) {
             	System.out.println("숫자 입력 실패 - input: "+ input);
@@ -385,7 +441,7 @@ public class ReservationView implements PLogger {
                 continue;
             }
 
-            System.out.println("문자열 입력 성공 - "+ input);
+            //System.out.println("문자열 입력 성공 - "+ input);
             return input;
         }
     }
@@ -408,10 +464,5 @@ public class ReservationView implements PLogger {
     private void printLine() {
     	System.out.println("================================");
     }
-	
-	
-	
-	
-	
 
 }

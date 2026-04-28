@@ -123,11 +123,7 @@ public class ReservationServiceImpl implements ReservationService {
 		{
 			if(vo.getMobileNumber().equals(param.getMobileNumber()))
 			{	
-				
-				if(vo.getName().equals(param.getName()))
-				{
-					return true;
-				}
+				return true;
 			}
 		}
 		return false;

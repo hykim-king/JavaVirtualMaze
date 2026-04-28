@@ -26,6 +26,7 @@ public class ThemeView {
 			System.out.println();
 			System.out.println("  1. 테마 조회");
 			System.out.println("  2. 예약 조회");
+			System.out.println("  0. 종료");
 			System.out.println("───────────────────────────────────────────────────────────");
 			System.out.print("선택 > ");
 
@@ -100,7 +101,7 @@ public class ThemeView {
 		ThemeVO condition = new ThemeVO();
 
 		condition.setGenre(inputWithValidation("  장르 (공포, 추리, 판타지) > ", new String[] { "공포", "추리", "판타지" }));
-		condition.setLocal(inputWithValidation("  지역 (서울, 경기, 그외) > ", new String[] { "서울", "경기", "그 외" }));
+		condition.setLocal(inputWithValidation("  지역 (서울, 경기, 그 외) > ", new String[] { "서울", "경기", "그 외" }));
 		condition.setLevel(inputWithValidation("  난이도 (상, 중, 하)  > ", new String[] { "상", "중", "하" }));
 		condition.setScare(inputWithValidation("  공포도 (높음, 낮음)  > ", new String[] { "높음", "낮음" }));
 		System.out.println("───────────────────────────────────────────────────────────\n");
