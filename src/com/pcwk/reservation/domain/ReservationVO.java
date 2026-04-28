@@ -45,6 +45,7 @@ public class ReservationVO extends DTO {
 	public String toCsv() {
 		return String.format("%s,%s,%s,%s", 
 				name, mobileNumber, date, themeName);
+		
 	}
 	
 	/**
@@ -56,6 +57,18 @@ public class ReservationVO extends DTO {
 				name, mobileNumber, date, themeName);
 	}
 	
+	/**
+	 * 동일한 예약정보 찾는 메서드
+	 * @return boolean
+	 */
+	public boolean isSame(ReservationVO vo) {
+		return this.name.equals(vo.name) && 
+		           this.mobileNumber.equals(vo.mobileNumber) &&
+		           this.date.equals(vo.date) &&
+		           this.themeName.equals(vo.themeName);
+	}
+	
+
 	/**
 	 * @return the name
 	 */
@@ -117,5 +130,6 @@ public class ReservationVO extends DTO {
 		return "ReservationVO [name=" + name + ", mobileNumber=" + mobileNumber + ", date=" + date + ", theme=" + themeName
 				+ ", toString()=" + super.toString() + "]";
 	}
+	
 	
 }

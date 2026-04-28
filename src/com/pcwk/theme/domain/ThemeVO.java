@@ -1,4 +1,4 @@
-package com.pcwk.theme.vo;
+package com.pcwk.theme.domain;
 
 public class ThemeVO {
     private String themeName;

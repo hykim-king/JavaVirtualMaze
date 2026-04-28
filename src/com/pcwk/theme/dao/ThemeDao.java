@@ -4,9 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pcwk.theme.vo.ThemeVO;
+import com.pcwk.cmn.WorkDiv;
+import com.pcwk.theme.domain.ThemeVO;
 
-public class ThemeDao {
+public class ThemeDao implements WorkDiv<ThemeVO> {
 
     private List<ThemeVO> themeList = new ArrayList<>();
     
@@ -77,4 +78,28 @@ public class ThemeDao {
         }
         return null;
     }
+
+	@Override
+	public int doSave(ThemeVO param) {
+		// TODO Auto-generated method stubS
+		return 0;
+	}
+
+	@Override
+	public int doUpdate(ThemeVO param1, ThemeVO param2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int doDelete(ThemeVO param) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<ThemeVO> doSelectOne(ThemeVO param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

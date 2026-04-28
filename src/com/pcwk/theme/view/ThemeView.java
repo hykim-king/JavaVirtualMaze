@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.pcwk.theme.vo.ThemeVO;
+import com.pcwk.theme.domain.ThemeVO;
 
 public class ThemeView {
 
 	Scanner sc = new Scanner(System.in);
+	
+	
+	// 스캐너 종료 메서드
+	public void scClose() {
+		sc.close();
+	}
 
 	// 메인 메뉴
 	public String mainMenu() {

@@ -25,10 +25,10 @@ public interface WorkDiv<T> {
 	/**
 	 * 예약 수정을 수행한다.
 	 * 수정할 회원 정보를 입력받아 서비스에 전달한다.
-	 * @param param
+	 * @param param1
 	 * @return 1:성공,0:실패
 	 */
-	int doUpdate(T param);
+	int doUpdate(T param1, T param2);
 
 	/**
 	 * 예약 삭제를 수행한다.
