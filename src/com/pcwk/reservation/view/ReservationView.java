@@ -13,6 +13,7 @@ public class ReservationView implements PLogger {
 	
 	private final Scanner sc ;
 	ReservationVO vo;
+	//ReservationVO 
 	
 
 	public ReservationView() {
@@ -192,7 +193,7 @@ public class ReservationView implements PLogger {
 		
 		printInReservationList(reservation);
 		
-		int input = inputNumber("선택 : ");
+		int input = inputNumber("번호 선택(위에서부터 1번) : ");
 		
 		return reservation.get(input-1);
 		
@@ -205,7 +206,7 @@ public class ReservationView implements PLogger {
 		
 		printInReservationList(reservation);
 		
-		int input = inputNumber("선택 : ");
+		int input = inputNumber("번호 선택(위에서부터 1번): ");
 		
 		return reservation.get(input-1);
 		
@@ -225,6 +226,7 @@ public class ReservationView implements PLogger {
         printTitle("예약 정보 입력");
 
         String name = inputText("이름 입력 > ");
+       // if()
         String mobileNumber = inputText("전화번호 입력 > ");
         String date = inputText("예약 날짜 입력 > ");
         String theme = selectedTheme.getThemeName();

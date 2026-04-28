@@ -91,7 +91,7 @@ public class ReservationServiceImpl implements ReservationService {
 		flag = dao.doUpdate(param, updateParam);
 
 		
-		if(flag == 2)
+		if(flag == 3)
 		{
 			dao.writerReservation();
 		}
@@ -122,8 +122,12 @@ public class ReservationServiceImpl implements ReservationService {
 		for(ReservationVO vo : list)
 		{
 			if(vo.getMobileNumber().equals(param.getMobileNumber()))
-			{	// true면 중복 번호 있다는뜻
-				return true;
+			{	
+				
+				if(vo.getName().equals(param.getName()))
+				{
+					return true;
+				}
 			}
 		}
 		return false;

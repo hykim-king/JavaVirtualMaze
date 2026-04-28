@@ -173,7 +173,7 @@ public class ReservationDao implements WorkDiv<ReservationVO>, PLogger {
 		while(iter.hasNext()) {
 			ReservationVO vo = iter.next();
 			
-			if(vo.getMobileNumber().equals(param.getMobileNumber()))
+			if(null != vo && vo.isSame(param))
 			{
 				iter.remove();
 				flag = 1;

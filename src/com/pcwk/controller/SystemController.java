@@ -45,7 +45,9 @@ public class SystemController {
 	 */
 	public void run() {
 		// 프로그램 전체 반복 실행 (종료 시까지 유지)
-		while(true) {
+		boolean running = true;
+		
+		while(running) {
 			// 메인 메뉴 화면 출력메서드 호출 후 값 입력 받기
 			String choice = themeView.mainMenu();
 			
@@ -57,15 +59,16 @@ public class SystemController {
 			case "0" -> 
 			{
 				// run()메서드 종료하여 프로그램 완전 종료
-				themeView.scClose();		// 스캐너 종료
-				reservationView.scClose();  // 스캐너 종료
+				
 				System.out.println("종료합니다.");
-				return;
+				running = false;
 			}
 			
 			default -> System.out.println("잘못된 입력입니다.");
 			}
 		}
+		themeView.scClose();
+		reservationView.scClose();
 	}
 	
 	// 1. 테마 메뉴 관리자
@@ -289,9 +292,9 @@ public class SystemController {
         // 결과 출력
         reservationView.printUpdateResult(flag);
 
-        if (flag == 2) {
-            reservationView.printReserveComplete();
-        }
+//        if (flag == 2) {
+//            reservationView.printReserveComplete();
+//        }
 
         processAfterReservationMenu();
     }
