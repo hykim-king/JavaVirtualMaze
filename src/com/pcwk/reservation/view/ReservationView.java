@@ -41,13 +41,9 @@ public class ReservationView implements PLogger {
 		System.out.println("│		         예약 내역 조회       	 	  │");
 		System.out.println("└─────────────────────────────────────────────────────────┘");;
     	
-		System.out.printf("\n 전화번호 입력 > ");
+		System.out.printf("\n전화번호 입력 > ");
         String mobileNumber=sc.nextLine();
-        System.out.println();
-		System.out.println("───────────────────────────────────────────────────────────");
-        System.out.println("전화번호: "+ mobileNumber);
-        System.out.println();
-		System.out.println("───────────────────────────────────────────────────────────");
+		System.out.println("\n───────────────────────────────────────────────────────────");
         
         return new ReservationVO(null, mobileNumber, null , null);
     }
@@ -58,11 +54,21 @@ public class ReservationView implements PLogger {
      */
     public void printInReservationList(List<ReservationVO> reservationList) {
     	
-    	for (ReservationVO vo : reservationList) {
-    		System.out.println("──────────────────────────────────────────────");
-    		System.out.println("예약 내역 출력: "+ vo.toCsv());
-    		System.out.println("──────────────────────────────────────────────");
-    	}
+    	int count = 1;
+
+        for (ReservationVO vo : reservationList) {
+
+            System.out.println(" [ 예약 " + count + " ]");
+            System.out.println();
+
+            System.out.println("  이름 : " + vo.getName());
+            System.out.println("  날짜 : " + vo.getDate());
+            System.out.println("  테마 : " + vo.getTheme());
+    		System.out.println("───────────────────────────────────────────────────────────");
+
+            count++;
+
+        }
     	
     }
     /**
@@ -85,14 +91,13 @@ public class ReservationView implements PLogger {
      */
     public int reservationMenu() {
  
-    	printTitle("예약 메뉴");
-
-    	System.out.println("1. 예약수정");
-    	System.out.println("2. 예약삭제");
-    	System.out.println("3. 메인메뉴");
-        
-
-        return inputNumber("메뉴 선택 : ");
+    	System.out.println();
+		System.out.println(" 1. 예약 수정");
+		System.out.println(" 2. 예약 삭제");
+		System.out.println(" 3. 메인 메뉴");
+		System.out.println();
+		return inputNumber("선택 > ");
+		
     }
 
     /**
@@ -176,16 +181,20 @@ public class ReservationView implements PLogger {
     
     public boolean inputUpdateReservation() {
         
+    	while(true)
+    	{
+    	    System.out.print("\n  현재 조회된 예약을 수정하시겠습니까? (Y/N) > ");
+    	    String answer = sc.nextLine().trim();
 
-        printTitle("예약 수정 입력");
-
-        System.out.println("현재 조회된 예약을 수정하시겠습니까?");
-        System.out.println("1. 수정");
-        System.out.println("2. 취소");
-
-        int menu = inputNumber("선택 : ");
-
-        return menu == 1;
+			if (answer.equalsIgnoreCase("Y")) {
+				return true;
+			} else if (answer.equalsIgnoreCase("N")) {
+				System.out.println("취소되었습니다. 목록으로 돌아갑니다.");
+				return false;
+			} else {
+				System.out.println("Y 또는 N만 입력해주세요.");
+			}
+    	}
     }
 
     /**
@@ -217,14 +226,12 @@ public class ReservationView implements PLogger {
     
 	public ReservationVO updateSelectTheme(List<ReservationVO> reservation) {
 		
-		printTitle("변경할 테마 선택");
-		
-		printInReservationList(reservation);
-		
-		int input = inputNumber("번호 선택(위에서부터 1번) : ");
-		
+		System.out.println("───────────────────────────────────────────────────────────");
+		System.out.println(" [예약 수정]\n");		
+		int input = inputNumber("변경할 예약의 예약 번호 입력 > ");
+		System.out.println("───────────────────────────────────────────────────────────");
+
 		return reservation.get(input-1);
-		
 		
 	}
 	
