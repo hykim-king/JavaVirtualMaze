@@ -10,69 +10,82 @@ public class ThemeView {
 
 	Scanner sc = new Scanner(System.in);
 	
-	
 	// 스캐너 종료 메서드
 	public void scClose() {
 		sc.close();
 	}
 
+	public void printTitle() {
+	    System.out.println("Java Virtual Maze");
+	}
+	
 	// 메인 메뉴
 	public String mainMenu() {
-		while (true) {
-			System.out.println("┌─────────────────────────────────────────────────────────┐");
-			System.out.println("│		       Java Virtual Maze        	  │");
-			System.out.println("└─────────────────────────────────────────────────────────┘");
-			System.out.println(" [ 메인 메뉴 ]");
-			System.out.println();
-			System.out.println("  1. 테마 조회");
-			System.out.println("  2. 예약 조회");
-			System.out.println("  0. 종료");
-			System.out.println("───────────────────────────────────────────────────────────");
-			System.out.print("선택 > ");
-
-			String input =  sc.nextLine().trim();
-			
-			switch (input) {
-			case "1":
-			case "2":
-			case "0":
-				return input;
-			default:
-				System.out.println("\n잘못된 입력입니다. 1, 2, 0 중에서 선택해주세요");
-			}
-		}
+	    printMainMenu();
+	    return inputOnly();
 	}
 
+	private void printMainMenu() {
+		System.out.println("┌─────────────────────────────────────────────────────────┐");
+		System.out.println("│		     	  메인 메뉴	        	  │");
+		System.out.println("└─────────────────────────────────────────────────────────┘");
+		System.out.println("  1. 테마 조회");
+		System.out.println("  2. 예약 조회");
+		System.out.println("  0. 종료");
+	}
+
+	public String inputOnly() {
+		printLine();
+	    System.out.print("선택 > ");
+	    String input = sc.nextLine();
+	    System.out.println(); 
+	    return input;
+	}
+	
 	// 테마 조회
 	public String themeMenu() {
-		while (true) {
-			System.out.println("\n┌─────────────────────────────────────────────────────────┐");
-			System.out.println("│		       	  테마 조회  	      	 	  │");
-			System.out.println("└─────────────────────────────────────────────────────────┘");
-			System.out.println(" 1. 전체 목록 보기");
-			System.out.println(" 2. 조건 검색");
-			System.out.println("    ┕ 장르 / 지역 / 난이도 / 공포도");
-			System.out.println("\n 0. 뒤로 가기");
-			System.out.println("───────────────────────────────────────────────────────────");
-			System.out.print("선택 > ");
-
-			String input = sc.nextLine().trim();
-
-			switch (input) {
-			case "1":
-			case "2":
-			case "0":
-				return input;
-			default:
-				System.out.println("\n잘못된 입력입니다. 1, 2, 0 중에서 선택해주세요");
-			}
-		}
+	    printThemeMenu();
+	    return inputOnly();
+	}
+	
+	private void printThemeMenu() {
+		System.out.println("┌─────────────────────────────────────────────────────────┐");
+		System.out.println("│		       	  테마 조회  	      	 	  │");
+		System.out.println("└─────────────────────────────────────────────────────────┘");
+		System.out.println(" 1. 전체 목록 보기");
+		System.out.println(" 2. 조건 검색");
+		System.out.println("    └ 장르 / 지역 / 난이도 / 공포도");
+		System.out.println("\n 0. 뒤로 가기");
 	}
 
-//	 전체 목록 출력 후 선택
+	// 1. 전체 목록 보기
 	public void showAllThemes(List<ThemeVO> list) {
-		System.out.println("\n[전체 테마 목록]");
+		System.out.println(" [ 전체 테마 목록 ]");
 		printThemeList(list);
+	}
+	
+	// 테마 리스트 출력 메서드
+	public void printThemeList(List<ThemeVO> list) {
+		System.out.println("┌────┬──────────────────┬────────┬──────┬────────┬────────┐");
+		System.out.println("│번호│ 테마명		│  장르  │ 지역 │ 난이도 │ 공포도 │");
+		System.out.println("├────┼──────────────────┼────────┼──────┼────────┼────────┤");
+		for (int i = 0; i < list.size(); i++) {
+			ThemeVO t = list.get(i);
+			System.out.printf("│ %2d │ %s │ %s │ %s │   %s   │  %s  │%n", (i + 1),
+					padKorean(t.getThemeName(), 16), padKorean(t.getGenre(), 6), t.getLocal(), t.getLevel(),
+					t.getScare());
+		}
+		System.out.println("└────┴──────────────────┴────────┴──────┴────────┴────────┘\n");
+	}
+	
+	// 한글 패딩 메서드 추가
+	String padKorean(String str, int targetWidth) {
+		int width = 0;
+		for (char c : str.toCharArray()) {
+			width += (c >= 0xAC00 && c <= 0xD7A3) ? 2 : 1; // 한글이면 2칸
+		}
+		int padding = targetWidth - width;
+		return str + " ".repeat(Math.max(0, padding));
 	}
 
 	// 조건 검색 유효성 검사 + 재입력 메서드
@@ -96,7 +109,7 @@ public class ThemeView {
 
 	// 조건을 입력받고 그 값을 condition에 담아 반환
 	public ThemeVO searchTheme() {
-		System.out.println("\n───────────────────────────────────────────────────────────");
+		System.out.println("───────────────────────────────────────────────────────────");
 		System.out.println(" [ 검색 조건 입력 ]  ※ 입력하지 않으면 전체 조건으로 조회\n");
 		ThemeVO condition = new ThemeVO();
 
@@ -104,15 +117,15 @@ public class ThemeView {
 		condition.setLocal(inputWithValidation("  지역 (서울, 경기, 그 외) > ", new String[] { "서울", "경기", "그 외" }));
 		condition.setLevel(inputWithValidation("  난이도 (상, 중, 하)  > ", new String[] { "상", "중", "하" }));
 		condition.setScare(inputWithValidation("  공포도 (높음, 낮음)  > ", new String[] { "높음", "낮음" }));
-		System.out.println("───────────────────────────────────────────────────────────\n");
-
+		printLine();
+		
 		return condition;
 	}
 	
-	
 	public void showSearchTheme(List<ThemeVO> list, ThemeVO condition) {
 		
-		System.out.println(" [ 검색 결과 ] \n");
+		System.out.println(" [ 테마 검색 결과 ] \n");
+		
 		// 입력했던 조건을 String리스트에 담아서 출력하는 용도
 		List<String> conditions = new ArrayList<>();
 		
@@ -127,8 +140,13 @@ public class ThemeView {
 			conditions.add("공포도: " + condition.getScare());
 		
 		// 입력한 조건 출력
-		System.out.println("  " + String.join(" / ", conditions));
-		System.out.println();
+		if (conditions.isEmpty()) {
+	        System.out.println("  검색 조건 (전체)");
+	    } else {
+	        System.out.println("  검색 조건 (" + String.join(" / ", conditions) + ")");
+	    }
+		
+	    System.out.println();
 		
 		// 조건에 맞는 테마들을 담은 리스트를 출력할 메서드 호출
 		printThemeList(list);
@@ -136,69 +154,64 @@ public class ThemeView {
 	}
 	
 	public void printNoSearchResult() {
-        System.out.println("\n검색 결과가 없습니다.");
+        System.out.println("\n  ※ 검색 결과가 없습니다.");
         return; // 테마 조회 메뉴로 복귀
-	}
-
-	// 전체 테마 목록 출력 및 조건 검색 테마 리스트 출력 메서드
-	public void printThemeList(List<ThemeVO> list) {
-		System.out.println("┌────┬──────────────────┬────────┬──────┬────────┬────────┐");
-		System.out.println("│번호│ 테마명		│  장르  │ 지역 │ 난이도 │ 공포도 │");
-		System.out.println("├────┼──────────────────┼────────┼──────┼────────┼────────┤");
-		for (int i = 0; i < list.size(); i++) {
-			ThemeVO t = list.get(i);
-			System.out.printf("│ %2d │ %s │ %s │ %s │   %s   │  %s  │%n", (i + 1),
-					padKorean(t.getThemeName(), 16), padKorean(t.getGenre(), 6), t.getLocal(), t.getLevel(),
-					t.getScare());
-		}
-		System.out.println("└────┴──────────────────┴────────┴──────┴────────┴────────┘\n");
-	}
-
-	// 한글 패딩 메서드 추가
-	String padKorean(String str, int targetWidth) {
-		int width = 0;
-		for (char c : str.toCharArray()) {
-			width += (c >= 0xAC00 && c <= 0xD7A3) ? 2 : 1; // 한글이면 2칸
-		}
-		int padding = targetWidth - width;
-		return str + " ".repeat(Math.max(0, padding));
 	}
 
 	// 테마 선택
 	public ThemeVO selectTheme(List<ThemeVO> list) {
-		while(true)
-		{
-			System.out.println(" [ 테마 예약 ] ※ 0. 뒤로가기\n");
-			System.out.print(" 테마 번호 입력 > ");
-			ThemeVO selected;
-			String input = sc.nextLine().trim();
-			System.out.println();
-			// 0 입력시 돌아감
-			if (input.equals("0"))
-				return null;
-
-			try {
-				// 선택한 테마 번호를 인덱스에 맞게 -1 한 값을 idx에 넣어줌
-				int idx = Integer.parseInt(input) - 1;
-				if (idx >= 0 && idx < list.size()) {
-					// 리스트에 담겨있는 테마를 인덱스번호로 찾아 selected에 넣음
-					selected = list.get(idx);
-					System.out.println("───────────────────────────────────────────────────────────");
-					System.out.println(" [ 선택한 테마 ]\n");
-					System.out.println("  테마명 : " + list.get(idx).getThemeName());
-					System.out.println("  장르   : " + list.get(idx).getGenre());
-					System.out.println("  지역   : " + list.get(idx).getLocal());
-					System.out.println("  난이도 : " + list.get(idx).getLevel());
-					System.out.println("  공포도 : " + list.get(idx).getScare());
-					System.out.println("───────────────────────────────────────────────────────────");
-					return selected;
-				} else {
-					System.out.println("올바른 번호를 입력해주세요. (1 ~ " + list.size() + " 사이)");
-				}
-			} catch (NumberFormatException e) {
-				System.out.println("테마에 해당하는 번호를 입력해주세요.");
-			}
-		}
+	    
+	    ThemeVO selected = null; // 루프 밖에서 선언
+	    
+	    printLine();
+	    System.out.println(" [ 테마 예약 ] ※ 0. 뒤로가기\n");
+        
+	    while (true) {
+	        
+	        System.out.print(" 테마 번호 입력 > ");
+	        String input = sc.nextLine().trim();
+	        System.out.println();
+	        
+	        // case 0. 뒤로가기
+	        if (input.equals("0"))
+	        	return null;
+	        
+	        // case 1. 숫자가 아닌 입력
+	        int idx;
+	        try {
+	            idx = Integer.parseInt(input) - 1;
+	        } catch (NumberFormatException e) {
+	            System.out.println("  ※ 숫자를 입력해주세요.");
+	            continue; // 루프 처음으로
+	        }
+	        
+	        // case 2. 범위를 벗어난 번호
+	        if (idx < 0 || idx >= list.size()) {
+	            System.out.println("  ※ 1 ~ " + list.size() + " 사이의 번호를 입력해주세요.");
+	            continue; // 루프 처음으로
+	        }
+	        
+	        // case 3. 정상 입력 - 여기까지 오면 유효한 값
+	        selected = list.get(idx);
+	        
+	        System.out.println("───────────────────────────────────────────────────────────");
+	        System.out.println(" [ 선택한 테마 ]\n");
+	        System.out.println("  테마명 : " + selected.getThemeName());
+	        System.out.println("  장르   : " + selected.getGenre());
+	        System.out.println("  지역   : " + selected.getLocal());
+	        System.out.println("  난이도 : " + selected.getLevel());
+	        System.out.println("  공포도 : " + selected.getScare());
+	        System.out.println("───────────────────────────────────────────────────────────");
+	        
+	        return selected;
+	    }
+	}
+	
+	/**
+	 * 구분선 출력
+	 */
+	private void printLine() {
+		System.out.println("───────────────────────────────────────────────────────────");
 	}
 
 }
