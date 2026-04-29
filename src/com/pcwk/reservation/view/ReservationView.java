@@ -194,10 +194,10 @@ public class ReservationView implements PLogger {
 				printLine();
 				return true;
 			} else if (answer.equalsIgnoreCase("N")) {
-				System.out.println("취소되었습니다. 목록으로 돌아갑니다.");
+				System.out.println("  취소되었습니다. 메인메뉴로 돌아갑니다.");
 				return false;
 			} else {
-				System.out.println("Y 또는 N만 입력해주세요.");
+				System.out.println("  Y 또는 N만 입력해주세요.");
 			}
 		}
 	}
@@ -221,10 +221,10 @@ public class ReservationView implements PLogger {
 			if (answer.equalsIgnoreCase("Y")) {
 				return true;
 			} else if (answer.equalsIgnoreCase("N")) {
-				System.out.println("취소되었습니다. 목록으로 돌아갑니다.");
+				System.out.println("  취소되었습니다. 목록으로 돌아갑니다.");
 				return false;
 			} else {
-				System.out.println("Y 또는 N만 입력해주세요.");
+				System.out.println("  Y 또는 N만 입력해주세요.");
 			}
 		}
 
@@ -235,7 +235,14 @@ public class ReservationView implements PLogger {
 		System.out.println();
 		printLine();
 		System.out.println(" [예약 수정]\n");
-		int input = inputNumber("  수정할 예약의 예약 번호 입력 > ");
+		int input = inputNumber("  수정할 예약의 테마 번호 입력 > ");
+		
+		if(input < 0 || input > reservation.size())
+		{
+			System.out.println("  1 ~ " + reservation.size() + "사이 번호를 입력하세요");
+			input = inputNumber("  수정할 예약의 테마 번호 입력 > ");
+		}
+
 		printLine();
 
 		return reservation.get(input - 1);
@@ -246,7 +253,7 @@ public class ReservationView implements PLogger {
 		
 		printInReservationList(reservation);
 
-		int input = inputNumber("번호 선택(위에서부터 1번): ");
+		int input = inputNumber(" 삭제할 예약의 번호 입력 >  ");
 
 		return reservation.get(input - 1);
 
@@ -355,11 +362,11 @@ public class ReservationView implements PLogger {
 	public void printDeleteResult(int flag) {
 
 		if (flag == 1) {
-			System.out.println("예약 삭제가 완료되었습니다.");
+			System.out.println("  예약 삭제가 완료되었습니다.");
 		} else if (flag == 2) {
-			System.out.println("해당 전화번호의 예약 내역이 없습니다.");
+			System.out.println("  해당 전화번호의 예약 내역이 없습니다.");
 		} else {
-			System.out.println("예약 삭제에 실패했습니다.");
+			System.out.println("  예약 삭제에 실패했습니다.");
 		}
 	}
 
@@ -368,7 +375,7 @@ public class ReservationView implements PLogger {
 	 */
 	public void printReserveComplete() {
 
-		System.out.print("예약 처리가 완료되었습니다.");
+		System.out.print("  예약 처리가 완료되었습니다.");
 	}
 
 	/**
@@ -380,7 +387,7 @@ public class ReservationView implements PLogger {
 	 */
 	public int afterReservationMenu() {
 
-		System.out.println("\n  1. 뒤로 가기");
+		System.out.println("\n  1. 메인 메뉴");
 		System.out.println("  2. 예약 내역 조회");
 		printLine();
 		return inputNumber("선택 > ");
@@ -405,8 +412,8 @@ public class ReservationView implements PLogger {
 				// System.out.println("숫자 입력 성공 - "+ number);
 				return number;
 			} catch (NumberFormatException e) {
-				System.out.println("숫자 입력 실패 - input: " + input);
-				System.out.println("숫자만 입력해주세요.");
+				System.out.println("  숫자 입력 실패 - input: " + input);
+				System.out.println("  숫자만 입력해주세요.");
 			}
 		}
 	}
@@ -426,8 +433,8 @@ public class ReservationView implements PLogger {
 			String input = sc.nextLine();
 
 			if (input.isEmpty()) {
-				System.out.println("빈 문자열 입력");
-				System.out.println("값을 입력해주세요.");
+				System.out.println("  빈 문자열 입력");
+				System.out.println("  값을 입력해주세요.");
 				continue;
 			}
 

@@ -39,12 +39,15 @@ public class SystemController {
 	// 프로그램의 메인 실행 로직을 담당
 	public void run() {
 
-		String choice = themeView.mainMenu(); // 최초 메뉴 출력 + 입력
+		//String choice = themeView.mainMenu(); // 최초 메뉴 출력 + 입력
 
 		// 프로그램 전체 반복 실행 (종료 시까지 유지)
 		boolean running = true;
 
 		while (running) {
+			
+			String choice = themeView.mainMenu();
+			
 			switch (choice) {
 			case "1" -> processThemeMenu(); // 테마 조회 서비스로 이동
 			case "2" -> processReservationManage(); // 예약 조회 서비스로 이동
@@ -55,9 +58,9 @@ public class SystemController {
 			default -> System.out.println(" ※ 잘못된 입력입니다.");
 			}
 
-			if (running == true) {
-				choice = themeView.inputOnly(); // 메뉴 재출력 없이 입력만
-			}
+//			if (running == true) {
+//				choice = themeView.inputOnly(); // 메뉴 재출력 없이 입력만
+//			}
 		}
 //		themeView.scClose();
 //		reservationView.scClose();
@@ -76,20 +79,20 @@ public class SystemController {
 			case "1" -> { // 전체 목록 보기
 				processShowAllThemes();
 				choice = themeView.themeMenu();
-				continue;
+				//continue;
 			}
 			case "2" -> { // 조건 검색
 				processSearchThemes();
 				choice = themeView.themeMenu();
-				continue;
+				//continue;
 			}
-			case "0" -> run(); // 뒤로 가기 (메인 메뉴)
+			case "0" -> {  return;  } // 뒤로 가기 (메인 메뉴)
 			default -> System.out.println(" ※ 잘못된 입력입니다.");
 			}
 
-			if (running) {
-				choice = themeView.inputOnly();
-			}
+//			if (running) {
+//				choice = themeView.inputOnly();
+//			}
 		}
 
 	}
@@ -195,32 +198,40 @@ public class SystemController {
 	 *
 	 * 흐름: 1. 예약 내역 조회 입력 2. 전화번호 기준 예약 존재 여부 확인 3. 예약 없으면 안내 후 메인메뉴 복귀 4. 예약 있으면 예약
 	 * 내역 출력 5. 예약 메뉴 출력 6. 예약수정 / 예약삭제 / 메인메뉴 처리
+	 * isSearching : 예약 조회시 전화번호 입력받고 예약내역이 없을시 재입력받기위한 용도
+	 * 				 예약 내역이 있을경우 내역 출력후 반복문 종료
 	 */
 	private void processReservationManage() {
+		boolean isSearching = true;
 
-		// 1. View에서 전화번호 입력받기
-		searchParam = reservationView.inputRetrieve();
+		while(isSearching)
+		{
+			// 1. View에서 전화번호 입력받기
+			searchParam = reservationView.inputRetrieve();
 
-		// 2. Service에서 전화번호 기준 예약 존재 여부 확인
-		boolean existsReservation = reservationService.isExistsMobileNumber(searchParam);
+			// 2. Service에서 전화번호 기준 예약 존재 여부 확인
+			boolean existsReservation = reservationService.isExistsMobileNumber(searchParam);
 
-		// 3. 예약 내역이 없으면
-		if (false == existsReservation) {
-			int menu = reservationView.printOutReservationList();
+			if(true == existsReservation)
+			{
+				// 4. 예약 내역이 있으면 조회 결과를 받아 출력
+				reservationList = reservationService.selectReservation(searchParam);
+				reservationView.printInReservationList(reservationList);
 
-		    if (menu == 1) {
-		        processReservationManage();
-		    }
-
-		    run();
+				// 5. 예약 내역 출력 후 예약 메뉴 처리
+				processReservationMenu();
+						
+				isSearching = false;
+			}else // 3. 예약 내역이 없으면
+			{
+				int menu = reservationView.printOutReservationList();
+				
+				if(menu == 2)
+				{
+					return;
+				}
+			}	
 		}
-
-		// 4. 예약 내역이 있으면 조회 결과를 받아 출력
-		reservationList = reservationService.selectReservation(searchParam);
-		reservationView.printInReservationList(reservationList);
-
-		// 5. 예약 내역 출력 후 예약 메뉴 처리
-		processReservationMenu();
 	}
 
 	/**
@@ -230,6 +241,8 @@ public class SystemController {
 	 */
 	private void processReservationMenu() {
 
+		//boolean isRunning = true;
+		
 		while (true) {
 			int menu = reservationView.reservationMenu();
 
@@ -268,7 +281,7 @@ public class SystemController {
 		boolean updateConfirm = reservationView.inputUpdateReservation();
 
 		if (false == updateConfirm) {
-			System.out.println("예약 수정을 취소했습니다.");
+			System.out.println("\n  예약 수정을 취소했습니다.");
 			return;
 		}
 
@@ -283,10 +296,6 @@ public class SystemController {
 
 		// 결과 출력
 		reservationView.printUpdateResult(flag, updateVo);
-
-//        if (flag == 2) {
-//            reservationView.printReserveComplete();
-//        }
 
 		processAfterReservationMenu();
 	}
@@ -326,7 +335,7 @@ public class SystemController {
 			int menu = reservationView.afterReservationMenu();
 
 			switch (menu) {
-			case 1 -> {
+			case 1 -> {			
 				return;
 			}
 			case 2 -> {
