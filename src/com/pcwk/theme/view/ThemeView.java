@@ -16,7 +16,11 @@ public class ThemeView {
 	}
 
 	public void printTitle() {
-	    System.out.println("Java Virtual Maze");
+	    System.out.println("    _                __   ___     _             _   __  __             ");
+	    System.out.println(" _ | |__ ___ ____ _  \\ \\ / (_)_ _| |_ _  _ __ _| | |  \\/  |__ _ ______ ");
+	    System.out.println("| || / _` \\ V / _` |  \\ V /| | '_|  _| || / _` | | | |\\/| / _` |_ / -_)");
+	    System.out.println(" \\__/\\__,_|\\_/\\__,_|   \\_/ |_|_|  \\__|\\_,_\\__,_|_| |_|  |_\\__,_/__\\___|");
+	    System.out.println("                                                                        ");
 	}
 	
 	// 메인 메뉴
@@ -109,7 +113,8 @@ public class ThemeView {
 
 	// 조건을 입력받고 그 값을 condition에 담아 반환
 	public ThemeVO searchTheme() {
-		System.out.println("───────────────────────────────────────────────────────────");
+
+		printLine();
 		System.out.println(" [ 검색 조건 입력 ]  ※ 입력하지 않으면 전체 조건으로 조회\n");
 		ThemeVO condition = new ThemeVO();
 
@@ -194,14 +199,14 @@ public class ThemeView {
 	        // case 3. 정상 입력 - 여기까지 오면 유효한 값
 	        selected = list.get(idx);
 	        
-	        System.out.println("───────────────────────────────────────────────────────────");
+	        printLine();
 	        System.out.println(" [ 선택한 테마 ]\n");
 	        System.out.println("  테마명 : " + selected.getThemeName());
 	        System.out.println("  장르   : " + selected.getGenre());
 	        System.out.println("  지역   : " + selected.getLocal());
 	        System.out.println("  난이도 : " + selected.getLevel());
 	        System.out.println("  공포도 : " + selected.getScare());
-	        System.out.println("───────────────────────────────────────────────────────────");
+	        printLine();
 	        
 	        return selected;
 	    }

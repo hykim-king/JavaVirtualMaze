@@ -39,8 +39,8 @@ public class SystemController {
 	// 프로그램의 메인 실행 로직을 담당
 	public void run() {
 
-		//String choice = themeView.mainMenu(); // 최초 메뉴 출력 + 입력
-
+		themeView.printTitle();
+		
 		// 프로그램 전체 반복 실행 (종료 시까지 유지)
 		boolean running = true;
 
