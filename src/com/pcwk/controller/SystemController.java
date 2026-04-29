@@ -71,30 +71,28 @@ public class SystemController {
 	 */
 	void processThemeMenu() {
 
-		String choice = themeView.themeMenu();
 		boolean running = true;
 
 		while (running) {
+			
+			String choice = themeView.themeMenu();
+			
 			switch (choice) {
 			case "1" -> { // 전체 목록 보기
 				processShowAllThemes();
-				choice = themeView.themeMenu();
-				//continue;
+				running = false;
+				
 			}
 			case "2" -> { // 조건 검색
 				processSearchThemes();
-				choice = themeView.themeMenu();
-				//continue;
+				running = false;
 			}
 			case "0" -> {  return;  } // 뒤로 가기 (메인 메뉴)
 			default -> System.out.println(" ※ 잘못된 입력입니다.");
 			}
-
-//			if (running) {
-//				choice = themeView.inputOnly();
-//			}
+			
 		}
-
+		return;
 	}
 
 	/**
@@ -185,9 +183,11 @@ public class SystemController {
 			return;
 		} else if (input == 2) {
 			// 내역 조회
-			ReservationVO searchParam = reservationView.inputRetrieve();
-			List<ReservationVO> reservationList = reservationService.selectReservation(searchParam);
-			reservationView.printInReservationList(reservationList);
+//			ReservationVO searchParam = reservationView.inputRetrieve();
+//			List<ReservationVO> reservationList = reservationService.selectReservation(searchParam);
+//			reservationView.printInReservationList(reservationList);
+			
+			processReservationManage();
 		}
 		
 		return;
