@@ -57,13 +57,10 @@ public class SystemController {
 			}
 			default -> System.out.println(" ※ 잘못된 입력입니다.");
 			}
-
-//			if (running == true) {
-//				choice = themeView.inputOnly(); // 메뉴 재출력 없이 입력만
-//			}
+			
 		}
-//		themeView.scClose();
-//		reservationView.scClose();
+		themeView.scClose();
+		reservationView.scClose();
 	}
 
 	/**
@@ -90,7 +87,7 @@ public class SystemController {
 			case "0" -> {  return;  } // 뒤로 가기 (메인 메뉴)
 			default -> System.out.println(" ※ 잘못된 입력입니다.");
 			}
-			
+
 		}
 		return;
 	}
@@ -182,11 +179,7 @@ public class SystemController {
 		if (input == 1) {
 			return;
 		} else if (input == 2) {
-			// 내역 조회
-//			ReservationVO searchParam = reservationView.inputRetrieve();
-//			List<ReservationVO> reservationList = reservationService.selectReservation(searchParam);
-//			reservationView.printInReservationList(reservationList);
-			
+			// 내역 조회			
 			processReservationManage();
 		}
 		
@@ -259,7 +252,7 @@ public class SystemController {
 				return;
 			}
 			default -> {
-				System.out.println("잘못된 입력입니다.");
+				System.out.println(" ※ 잘못된 입력입니다.");
 			}
 			}
 		}
@@ -268,8 +261,8 @@ public class SystemController {
 	/**
 	 * 예약 수정 처리
 	 *
-	 * 흐름: 1. 수정 여부 확인 2. View에서 수정할 예약건 선택 후, 변경 날짜, 변경 테마 입력 3. Service에서 수정 처리 4.
-	 * 수정 결과 출력 5. 성공 시 예약 완료 출력 6. 메인메뉴 / 예약내역조회 선택
+	 * 흐름: 1. View에서 수정할 예약건 선택 후, 변경 날짜, 변경 테마 입력 2. 수정 여부 확인 3. Service에서 수정 처리
+	 * 4. 수정 결과 출력 5. 성공 시 예약 완료 출력 6. 메인메뉴 / 예약내역조회 선택
 	 */
 
 	private void processUpdateReservation() {
@@ -314,7 +307,7 @@ public class SystemController {
 		boolean deleteConfirm = reservationView.inputDeleteReservation();
 
 		if (false == deleteConfirm) {
-			System.out.println("예약 삭제를 취소했습니다.");
+			System.out.println("  예약 삭제를 취소했습니다.");
 			return;
 		}
 
@@ -343,17 +336,10 @@ public class SystemController {
 				return;
 			}
 			default -> {
-				System.out.println("잘못된 입력입니다.");
+				System.out.println(" ※ 잘못된 입력입니다.");
 			}
 			}
 		}
-	}
-
-	/**
-	 * 구분선 출력
-	 */
-	private void printLine() {
-		System.out.println("───────────────────────────────────────────────────────────");
 	}
 
 }

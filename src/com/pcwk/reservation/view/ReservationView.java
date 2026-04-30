@@ -15,7 +15,6 @@ public class ReservationView implements PLogger {
 
 	private final Scanner sc;
 	ReservationVO vo;
-	// ReservationVO
 
 	public ReservationView() {
 		sc = new Scanner(System.in);
@@ -128,13 +127,13 @@ public class ReservationView implements PLogger {
 	 */
 	public ReservationVO inputUpdateReservation(ReservationVO param, List<ThemeVO> listParam) {
 
-		int theme = inputNumber("변경할 테마 번호 > ");
+		int theme = inputNumber("  변경할 테마 번호 > ");
 
 		String date = "";
 		LocalDate today = LocalDate.now();
 
 		while (true) {
-			date = inputText("변경할 날짜 (YYYY-MM-DD) > ");
+			date = inputText("  변경할 날짜 (YYYY-MM-DD) > ");
 
 			try {
 				// 1. 입력받은 문자열을 LocalDate로 변환
@@ -142,7 +141,7 @@ public class ReservationView implements PLogger {
 
 				// 2. isBefore를 사용하여 오늘보다 이전인지 체크
 				if (inputDate.isBefore(today)) {
-					System.out.println("오늘 이전 날짜로 변경 할 수 없습니다. (today: " + today + ") 다시 입력해주세요.");
+					System.out.println("  ※ 오늘 이전 날짜로 변경 할 수 없습니다. (today: " + today + ") 다시 입력해주세요.");
 					continue; // 다시 입력받기
 				}
 
@@ -151,7 +150,7 @@ public class ReservationView implements PLogger {
 
 			} catch (DateTimeParseException e) {
 				// 날짜 형식이 올바르지 않은 경우 (예: 2026-02-30 등 존재하지 않는 날짜 포함)
-				System.out.println("날짜 형식이 올바르지 않습니다 다시 입력해주세요.");
+				System.out.println("  ※ 날짜 형식이 올바르지 않습니다 다시 입력해주세요.");
 			}
 		}
 
@@ -364,9 +363,9 @@ public class ReservationView implements PLogger {
 		if (flag == 1) {
 			System.out.println("  예약 삭제가 완료되었습니다.");
 		} else if (flag == 2) {
-			System.out.println("  해당 전화번호의 예약 내역이 없습니다.");
+			System.out.println("  ※ 해당 전화번호의 예약 내역이 없습니다.");
 		} else {
-			System.out.println("  예약 삭제에 실패했습니다.");
+			System.out.println("  ※ 예약 삭제에 실패했습니다.");
 		}
 	}
 
@@ -409,10 +408,9 @@ public class ReservationView implements PLogger {
 
 			try {
 				int number = Integer.parseInt(input);
-				// System.out.println("숫자 입력 성공 - "+ number);
+
 				return number;
 			} catch (NumberFormatException e) {
-				System.out.println("  숫자 입력 실패 - input: " + input);
 				System.out.println("  숫자만 입력해주세요.");
 			}
 		}
@@ -438,7 +436,6 @@ public class ReservationView implements PLogger {
 				continue;
 			}
 
-			// System.out.println("문자열 입력 성공 - "+ input);
 			return input;
 		}
 	}
